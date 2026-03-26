@@ -11,6 +11,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.JTree;
+import java.awt.GridLayout;
 
 public class LogIn extends JFrame {
 
@@ -20,19 +23,21 @@ public class LogIn extends JFrame {
     private JPasswordField txtPassword;  // changed to JPasswordField
     private JButton btnLogIn;
     private LoginController loginController;  // added
+    private JRadioButton rbtnShow;
 
     public LogIn() {
         loginController = new LoginController();  // added
         executeCode();
     }
-
+ 
     public void executeCode() {
         setupFrame();
     }
 
     public void setupFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 458, 477);
+        setResizable(false);
+        setBounds(100, 100, 347, 381);
         contentPane = new JPanel();
         contentPane.setBackground(Color.LIGHT_GRAY);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -40,18 +45,27 @@ public class LogIn extends JFrame {
         contentPane.setLayout(null);
 
         txtUserName = new JTextField();
-        txtUserName.setBounds(101, 196, 206, 20);
+        txtUserName.setBounds(49, 189, 247, 20);
         contentPane.add(txtUserName);
         txtUserName.setColumns(10);
 
         txtPassword = new JPasswordField();  // changed to JPasswordField
         txtPassword.setColumns(10);
-        txtPassword.setBounds(101, 242, 206, 20);
+        txtPassword.setBounds(49, 213, 247, 20);
         contentPane.add(txtPassword);
 
         btnLogIn = new JButton("Log In");
-        btnLogIn.setBounds(156, 306, 89, 23);
+        btnLogIn.setBounds(112, 282, 104, 20);
         contentPane.add(btnLogIn);
+        
+        rbtnShow = new JRadioButton("show");
+        rbtnShow.setBounds(49, 240, 65, 23);
+        contentPane.add(rbtnShow);
+        
+        JPanel panel = new JPanel();
+        panel.setBounds(93, 50, 141, 103);
+        contentPane.add(panel);
+        panel.setLayout(new GridLayout(1, 0, 0, 0));
         setLocationRelativeTo(null);
 
         // added action listener

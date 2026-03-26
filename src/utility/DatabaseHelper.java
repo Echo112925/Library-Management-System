@@ -18,5 +18,5 @@ public class DatabaseHelper {
             e.printStackTrace();
             return null;
         }
-    }
+    } 
 }
