@@ -6,14 +6,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
-import javax.swing.JTree;
-import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class LogIn extends JFrame {
 
@@ -24,6 +26,7 @@ public class LogIn extends JFrame {
     private JButton btnLogIn;
     private LoginController loginController;  // added
     private JRadioButton rbtnShow;
+    private JLabel logo;
 
     public LogIn() {
         loginController = new LoginController();  // added
@@ -32,6 +35,8 @@ public class LogIn extends JFrame {
  
     public void executeCode() {
         setupFrame();
+        setLocationRelativeTo(null);
+
     }
 
     public void setupFrame() {
@@ -52,6 +57,7 @@ public class LogIn extends JFrame {
         txtPassword = new JPasswordField();  // changed to JPasswordField
         txtPassword.setColumns(10);
         txtPassword.setBounds(49, 213, 247, 20);
+        txtPassword.setEchoChar('*'); // default view ng jpasswordfield, kahit walng ganyan
         contentPane.add(txtPassword);
 
         btnLogIn = new JButton("Log In");
@@ -62,11 +68,15 @@ public class LogIn extends JFrame {
         rbtnShow.setBounds(49, 240, 65, 23);
         contentPane.add(rbtnShow);
         
-        JPanel panel = new JPanel();
-        panel.setBounds(93, 50, 141, 103);
-        contentPane.add(panel);
-        panel.setLayout(new GridLayout(1, 0, 0, 0));
-        setLocationRelativeTo(null);
+        JLabel logo = new JLabel();
+		ImageIcon icon = new ImageIcon(AdminDash.class.getResource("/img/images__1_-removebg-preview.png"));
+		// resize image to fit label bounds
+		Image img = icon.getImage();
+		Image resized = img.getScaledInstance(185, 148, Image.SCALE_SMOOTH);
+		logo.setIcon(new ImageIcon(resized));
+		logo.setBounds(73, 11, 198, 181);
+		contentPane.add(logo);		
+        
 
         // added action listener
         btnLogIn.addActionListener(new ActionListener() {
@@ -74,17 +84,31 @@ public class LogIn extends JFrame {
                 handleLogin();
             }
         });
+        
+        rbtnShow.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        	
+        	if(rbtnShow.isSelected()) {
+        		txtPassword.setEchoChar((char)0);
+        	}else {
+        		txtPassword.setEchoChar('*');
+        	}	
+        		
+        	}
+        });
+        
     }
 
     private void handleLogin() {
-        String userName = txtUserName.getText().trim();
-        String password = new String(txtPassword.getPassword()).trim();
+        String userName = txtUserName.getText().trim().replaceAll("\\s+", " "); //  \\s Regex palitan lahat ng multiple space ng one spcae lng
+        String password = new String(txtPassword.getPassword()).replaceAll("\\s+", " ");
 
         // Check if empty
         if (userName.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                 "Please fill in all fields.",
-                "Warning",
+                "Warning Po!",
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -95,16 +119,19 @@ public class LogIn extends JFrame {
         if (success) {
             JOptionPane.showMessageDialog(this,
                 "Login successful!",
-                "Success",
+                "Success Po!",
                 JOptionPane.INFORMATION_MESSAGE);
             this.dispose(); // close login form
-            // TODO: open Dashboard
-            // new Dashboard().setVisible(true);
+            AdminDash aDash = new AdminDash();
+            aDash.setVisible(true);
+            
         } else {
             JOptionPane.showMessageDialog(this,
                 "Invalid username or password.",
-                "Login Failed",
+                "Login Failed po",
                 JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    
 }

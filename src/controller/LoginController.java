@@ -8,7 +8,7 @@ public class LoginController {
     private UserDAO userDAO;
 
     public LoginController() {
-        this.userDAO = new UserDAO();
+       userDAO = new UserDAO();
     }
 
     public boolean login(String userName, String password) {
