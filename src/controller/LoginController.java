@@ -10,7 +10,7 @@ public class LoginController {
     public LoginController() {
        userDAO = new UserDAO();
     }
-
+ 
     public boolean login(String userName, String password) {
         User user = userDAO.validateLogin(userName, password);
         return user != null; // true = login success
