@@ -9,7 +9,8 @@ public class MainFrame extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JPanel currentPanel;
-    private Modules modules;
+    
+    private Modules modules; // composition
 
     public MainFrame() {
         executeCode();
@@ -19,6 +20,10 @@ public class MainFrame extends JFrame {
         setupFrame();
         initComponents(); 
         showPanel(new DashboardPanel()); // default panel kapag nag-open ang MainFrame
+        // BINAGO: MainFrame na ang naipass, hindi na AdminDash
+        modules = new Modules(this);
+        modules.setBounds(0, 0, 240, 768);
+        contentPane.add(modules);
     }
 
     public void setupFrame() {
@@ -32,10 +37,6 @@ public class MainFrame extends JFrame {
     }
 
     public void initComponents() {
-        // BINAGO: MainFrame na ang naipass, hindi na AdminDash
-        modules = new Modules(this);
-        modules.setBounds(0, 0, 240, getHeight());
-        contentPane.add(modules);
    
     }
 

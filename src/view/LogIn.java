@@ -55,7 +55,6 @@ public class LogIn extends JFrame {
         txtPassword = new JPasswordField();
         txtPassword.setColumns(10);
         txtPassword.setBounds(49, 213, 247, 20);
-        txtPassword.setEchoChar('*');
         contentPane.add(txtPassword);
 
         btnLogIn = new JButton("Log In");

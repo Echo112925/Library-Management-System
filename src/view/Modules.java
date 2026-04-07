@@ -17,6 +17,7 @@ public class Modules extends JPanel {
     // BINAGO: AdminDash → MainFrame na ang reference
     private MainFrame mainFrame;
 
+    //purpose ng pag overloading constructor is para makita ung panel sa MainFrame Design tab
     public Modules() {
         setPanel();
     }
@@ -35,8 +36,7 @@ public class Modules extends JPanel {
         JLabel logo = new JLabel();
         ImageIcon originalIcon = new ImageIcon(
         Modules.class.getResource("/img/images__1_-removebg-preview.png"));
-        Image scaledImage = originalIcon.getImage()
-            .getScaledInstance(200, 162, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(200, 162, Image.SCALE_SMOOTH);
         logo.setIcon(new ImageIcon(scaledImage));
         logo.setBounds(20, 32, 230, 159);
         add(logo);
