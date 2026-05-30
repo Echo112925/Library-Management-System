@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class UserDAO {
 
-    public User validateLogin(String userName, String password) {
+    public User validateLogin(String userName, String password) throws SQLException {
         String sql = "SELECT * FROM tbl_user WHERE userName = ? AND password = ?";
         try (Connection conn = DatabaseHelper.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -19,10 +19,8 @@ public class UserDAO {
             if (rs.next()) {
                 return new User(rs.getString("userName"), rs.getString("password"));
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+ 
+        } 
         return null; // null means login failed
     }
 }

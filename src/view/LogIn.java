@@ -1,6 +1,7 @@
 package view;
 
 import controller.LoginController;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -25,29 +26,37 @@ public class LogIn extends JFrame {
     private JButton btnLogIn;
     private LoginController loginController;
     private JRadioButton rbtnShow;
+    private JButton btn;
+    
 
+    
     public LogIn() {
         loginController = new LoginController();
-        executeCode();
+        initialize();
     }
 
-    public void executeCode() {
-        setupFrame();
-        initAction();
-        setLocationRelativeTo(null);
+    public void initialize() {
+        setFrame();
+        initComponents();
+        initActions();
     }
 
-    public void setupFrame() {
+    public void setFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setBounds(100, 100, 347, 381);
-        contentPane = new JPanel();
-        contentPane.setBackground(Color.LIGHT_GRAY);
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
-
-        txtUserName = new JTextField();
+        setLocationRelativeTo(null);
+    }
+        
+    
+    public void initComponents() {
+    	 contentPane = new JPanel();
+         contentPane.setBackground(Color.LIGHT_GRAY);
+         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+         setContentPane(contentPane);
+         contentPane.setLayout(null);
+    	
+    	txtUserName = new JTextField();
         txtUserName.setBounds(49, 189, 247, 20);
         contentPane.add(txtUserName);
         txtUserName.setColumns(10);
@@ -74,9 +83,21 @@ public class LogIn extends JFrame {
         logo.setIcon(new ImageIcon(resized));
         logo.setBounds(73, 11, 198, 181);
         contentPane.add(logo);
+        
+        btn = new JButton("Shortcut");
+        btn.setLocation(0, 11);
+        btn.setSize(85, 20);
+        contentPane.add(btn);
+    
     }
 
-    public void initAction() {
+    public void initActions() {
+    	
+    	  btn.addActionListener(e -> {
+          	MainFrame mainFrame = new MainFrame();
+          	mainFrame.setVisible(true);
+          	this.dispose();          });
+    	
         btnLogIn.addActionListener(e -> handleLogin());
 
         rbtnShow.addActionListener(new ActionListener() {
@@ -92,6 +113,7 @@ public class LogIn extends JFrame {
     }
 
     private void handleLogin() {
+   	
         String userName = txtUserName.getText().trim().replaceAll("\\s+", " ");
         String password = new String(txtPassword.getPassword()).replaceAll("\\s+", " ");
 
@@ -101,7 +123,7 @@ public class LogIn extends JFrame {
                 "Warning Po!", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+  try {
         boolean success = loginController.login(userName, password);
 
         if (success) {
@@ -119,5 +141,9 @@ public class LogIn extends JFrame {
                 "Login Failed po",
                 JOptionPane.ERROR_MESSAGE);
         }
+  }catch(RuntimeException e) {
+	  JOptionPane.showMessageDialog(this, e.getMessage());
+  }
     }
+    
 }

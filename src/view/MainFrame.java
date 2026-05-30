@@ -11,15 +11,16 @@ public class MainFrame extends JFrame {
     private JPanel currentPanel;
     
     private Modules modules; // composition
-
+  
+    
     public MainFrame() {
+    	
         executeCode();
     }
 
     public void executeCode() {
         setupFrame();
-        initComponents(); 
-        showPanel(new DashboardPanel()); // default panel kapag nag-open ang MainFrame
+        showPanel(new DashboardView()); // default panel kapag nag-open ang MainFrame
         // BINAGO: MainFrame na ang naipass, hindi na AdminDash
         modules = new Modules(this);
         modules.setBounds(0, 0, 240, 768);
@@ -27,18 +28,16 @@ public class MainFrame extends JFrame {
     }
 
     public void setupFrame() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1366, 768);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        contentPane = new JPanel();
-        contentPane.setLayout(null);
-        setContentPane(contentPane);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBounds(100, 100, 1366, 768);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.contentPane = new JPanel();
+        this.contentPane.setLayout(null);
+        this.setContentPane(contentPane);
     }
 
-    public void initComponents() {
-   
-    }
+ 
 
     public void showPanel(JPanel panel) {
         if (currentPanel != null) {

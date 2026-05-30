@@ -6,10 +6,10 @@ import java.awt.Font;
 
 // BAGO: placeholder lang muna para sa Dashboard content
 // pwede mong dagdagan ng charts, tables, etc. later
-public class DashboardPanel extends JPanel {
+public class DashboardView extends JPanel {
     private static final long serialVersionUID = 1L;
 
-    public DashboardPanel() {
+    public DashboardView() {
         setLayout(null);
 
         JLabel label = new JLabel("DASHBOARD");
@@ -17,4 +17,7 @@ public class DashboardPanel extends JPanel {
         label.setBounds(34, 128, 300, 50);
         add(label);
     }
+    
+    
+    
 }

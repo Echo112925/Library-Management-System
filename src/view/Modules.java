@@ -1,12 +1,16 @@
 package view;
 
 import javax.swing.JPanel;
+
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Modules extends JPanel {
     private static final long serialVersionUID = 1L;
@@ -16,11 +20,8 @@ public class Modules extends JPanel {
 
     // BINAGO: AdminDash → MainFrame na ang reference
     private MainFrame mainFrame;
+   
 
-    //purpose ng pag overloading constructor is para makita ung panel sa MainFrame Design tab
-    public Modules() {
-        setPanel();
-    }
     
     // BINAGO: AdminDash → MainFrame na ang parameter
     public Modules(MainFrame mainFrame) {
@@ -30,7 +31,7 @@ public class Modules extends JPanel {
     }
 
     public void setPanel() {
-        setBackground(Color.GRAY);
+        setBackground(new Color(51, 204, 51));
         setLayout(null);
 
         JLabel logo = new JLabel();
@@ -46,7 +47,11 @@ public class Modules extends JPanel {
         btnDashboard.setBounds(21, 232, 200, 30);
         add(btnDashboard);
 
-        btnFileMaintenance = new JButton("FILE MAINTENANCE");
+        btnFileMaintenance = new JButton("BOOK MAINTENANCE");
+        btnFileMaintenance.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnFileMaintenance.setFont(new Font("Tahoma", Font.BOLD, 13));
         btnFileMaintenance.setBounds(20, 273, 200, 30);
         add(btnFileMaintenance);
@@ -60,10 +65,10 @@ public class Modules extends JPanel {
     public void initAction() {
         // BINAGO: mainFrame na ang ginagamit, hindi na adminDash
         btnDashboard.addActionListener(e ->
-            mainFrame.showPanel(new DashboardPanel()));
+            mainFrame.showPanel(new DashboardView()));
 
         btnFileMaintenance.addActionListener(e ->
-            mainFrame.showPanel(new FileMaintenancePanel()));
+            mainFrame.showPanel(new BookMaintenanceView()));
 
         
     }
